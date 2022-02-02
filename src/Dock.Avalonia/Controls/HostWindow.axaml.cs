@@ -106,7 +106,7 @@ public class HostWindow : Window, IStyleable, IHostWindow
         _draggingWindow = true;
         BeginMoveDrag(e);
             
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (!e.GetCurrentPoint(null).Properties.IsLeftButtonPressed)
         {
             EndDrag(e);
         }
