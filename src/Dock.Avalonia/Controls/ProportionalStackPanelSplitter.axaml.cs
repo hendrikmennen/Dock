@@ -47,6 +47,12 @@ public class ProportionalStackPanelSplitter : Thumb
     /// </summary>
     public static readonly AttachedProperty<bool> IsEmptyProperty =
         AvaloniaProperty.RegisterAttached<ProportionalStackPanelSplitter, Control, bool>("IsEmpty", false, false, BindingMode.TwoWay);
+    
+    /// <summary>
+    /// Defines the IsEmpty attached property.
+    /// </summary>
+    public static readonly AttachedProperty<bool> IsCollapsibleProperty =
+        AvaloniaProperty.RegisterAttached<ProportionalStackPanelSplitter, Control, bool>("IsCollapsible", false, false, BindingMode.TwoWay);
 
     /// <summary>
     /// Gets the value of the IsEmpty attached property on the specified control.
@@ -56,6 +62,26 @@ public class ProportionalStackPanelSplitter : Thumb
     public static bool GetIsEmpty(AvaloniaObject control)
     {
         return control.GetValue(IsEmptyProperty);
+    }
+    
+    /// <summary>
+    /// Gets the value of the IsCollapsible attached property on the specified control.
+    /// </summary>
+    /// <param name="control">The control.</param>
+    /// <returns>The IsCollapsible attached property.</returns>
+    public static bool GetIsCollapsible(AvaloniaObject control)
+    {
+        return control.GetValue(IsCollapsibleProperty);
+    }
+    
+    /// <summary>
+    /// Sets the value of the IsCollapsible attached property on the specified control.
+    /// </summary>
+    /// <param name="control">The control.</param>
+    /// <param name="value">The value of the IsCollapsible property.</param>
+    public static void SetIsCollapsible(AvaloniaObject control, bool value)
+    {
+        control.SetValue(IsCollapsibleProperty, value);
     }
 
     /// <summary>
@@ -198,7 +224,7 @@ public class ProportionalStackPanelSplitter : Thumb
 
             if (contentPresenter.Child is not null)
             {
-                return GetIsEmpty(contentPresenter.Child);
+                return GetIsEmpty(contentPresenter.Child) && GetIsCollapsible(contentPresenter.Child);
             }
 
             return false;
@@ -206,7 +232,7 @@ public class ProportionalStackPanelSplitter : Thumb
 
         if (control is not null)
         {
-            return GetIsEmpty(control);
+            return GetIsEmpty(control) && GetIsCollapsible(control);
         }
 
         return false;
