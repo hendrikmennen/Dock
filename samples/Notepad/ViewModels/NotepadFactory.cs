@@ -47,7 +47,7 @@ public class NotepadFactory : Factory
         {
             Id = "Files",
             Title = "Files",
-            IsCollapsable = true,
+            IsCollapsable = false,
             Proportion = double.NaN,
             ActiveDockable = untitledFileViewModel,
             VisibleDockables = CreateList<IDockable>
